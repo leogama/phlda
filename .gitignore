@@ -1,3 +1,9 @@
+# Raw data and generated files
+/cache/
+/data/
+/log/
+/output/
+
 # History files
 .Rhistory
 .Rapp.history
