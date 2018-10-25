@@ -28,7 +28,8 @@ if (!is.na(info$pubmed_id)) {
         xml_text()
     info$article_abstract <- record %>%
         xml_find_all('.//AbstractText') %>%
-        xml_text()
+        xml_text() %>%
+        paste(collapse=' ')
     fetch <- function() entrez_link(dbfrom='pubmed', id=info$pubmed_id, cmd='llinks')
     retry <- function(...) tryCatch(fetch(), error=retry)
     info$article_fulltext <- retry() %>%

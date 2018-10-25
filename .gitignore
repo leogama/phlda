@@ -7,6 +7,9 @@
 # Snakemake state files
 .snakemake/
 
+# R Notebook html outputs
+*.nb.html
+
 # History files
 .Rhistory
 .Rapp.history

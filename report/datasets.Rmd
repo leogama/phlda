@@ -1,0 +1,16 @@
+---
+title: "Datasets description"
+output: html_notebook
+---
+```{r}
+knitr::opts_knit$set(root.dir=dirname(getwd()))
+```
+
+```{r}
+cat(getwd())
+```
+
+```{r}
+config <- yaml::read_yaml('config.yaml')
+config$geo_datasets
+```

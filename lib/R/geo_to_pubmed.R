@@ -39,8 +39,7 @@ pmid_from_web <- function(gse_id) {
         pmid <- info_table %>%
             rvest::html_table() %>%
             getElement(1) %>%
-            filter(grepl('citation', X1, ignore.case=T)) %>%
-            with(X2) %>%
+            filter(grepl('citation', X1, ignore.case=T)) %$% X2 %>%
             sub('.+ ', '', .) %>%
             as.integer()
     }, error=function(...) NA)
