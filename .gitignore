@@ -4,12 +4,16 @@
 /log/
 /output/
 
+# Snakemake state files
+.snakemake/
+
 # History files
 .Rhistory
 .Rapp.history
 
 # Session Data files
 .RData
+*.rda
 
 # Example code in package build process
 *-Ex.R
@@ -40,3 +44,4 @@ vignettes/*.pdf
 
 # Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
 rsconnect/
+.Rproj.user
