@@ -1,4 +1,3 @@
-GEOmetadb: /opt/databases/GEOmetadb.sqlite
 geo_datasets:
   - GSE37946
   - GSE42822

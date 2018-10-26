@@ -1,40 +1,24 @@
-options(error=save.image())
-
-source('lib/R/geo_to_pubmed.R')
-packages <- c('magrittr', 'rentrez', 'RSQLite', 'xml2')
+source('lib/R/geo.R')
+packages <- c('magrittr', 'rentrez')
 invisible(lapply(packages, library, character=TRUE))
 
-con <- dbConnect(SQLite(), snakemake@config$GEOmetadb)
 info <- snakemake@wildcards$gse_id %>%
-    sprintf('SELECT title,summary,overall_design,pubmed_id FROM gse WHERE gse="%s"', .) %>% 
-    dbGetQuery(con, .) %>%
-    as.list()
+    info_from_eutils()
+info <- snakemake@wildcards$gse_id %>%
+    info_from_web() %>%
+    c(info)
 
-if (is.na(info$pubmed_id)) {
-    info$pubmed_id <- snakemake@wildcards$gse_id %>%
-        pmid_from_web() %>%
-        as.character()
+article <- snakemake@wildcards$gse_id %>%
+    geo_to_pubmed()
+if (!is.na(article)) {
+    info$article_url <- sprintf('https://doi.org/%s', article$doi)
+    info$article_title <- article$title
+    info$article_abstract <- paste(article$abstract, collapse=' ')
 }
 
-if (!is.na(info$pubmed_id)) {
-    fetch <- function() entrez_fetch(db='pubmed', id=info$pubmed_id, rettype='xml')
-    retry <- function(...) tryCatch(fetch(), error=retry)
-    record <- info$pubmed_id %>%
-        as.character() %>%
-        retry() %>%
-        read_xml()
-    info$article_title <- record %>%
-        xml_find_all('.//ArticleTitle') %>%
-        xml_text()
-    info$article_abstract <- record %>%
-        xml_find_all('.//AbstractText') %>%
-        xml_text() %>%
-        paste(collapse=' ')
-    fetch <- function() entrez_link(dbfrom='pubmed', id=info$pubmed_id, cmd='llinks')
-    retry <- function(...) tryCatch(fetch(), error=retry)
-    info$article_fulltext <- retry() %>%
-        unlist() %>%
-        getElement(1)
-}
+try({
+    meta_info <- snakemake@wildcards$gse_id %>%
+        extract(c('title', 'summary', 'overall_design'))
+})
 
 dput(info, file=snakemake@output[[1]])
