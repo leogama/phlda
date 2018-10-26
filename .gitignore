@@ -10,6 +10,9 @@
 # R Notebook html outputs
 *.nb.html
 
+# Microsoft Azure Notebooks
+.aznbsetup.log
+
 # History files
 .Rhistory
 .Rapp.history
