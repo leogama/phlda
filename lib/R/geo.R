@@ -34,7 +34,7 @@ info_from_web <- memoise(function(gse_id) {
     doc <- gse_id %>%
         sprintf(fmt='https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=%s') %>%
         httr::RETRY(verb='GET', times=5L, quiet=TRUE) %>%
-        httr::content()
+        httr::content(encoding='UTF-8')
     info_table <- doc %>%
         rvest::html_nodes('table:nth-of-type(2) table:nth-of-type(1)') %>%
         extract(1)
@@ -54,10 +54,13 @@ geo_to_pubmed <- memoise(function(gse_id) {
     if (is.na(pmid)) {
         info <- info_from_web(gse_id)
         pmid <- info %>%
-            getElement(grep('citation', names(pmid), ignore.case=TRUE)) %>%
+            getElement(grep('citation', names(info), ignore.case=TRUE)) %>%
             stringr::str_extract('\\d+$')
     }
     if (is.na(pmid)) return(NA)
-    retry(rentrez::entrez_fetch(db='pubmed', id=pmid, rettype='xml')) %>%
-        rentrez::parse_pubmed_xml()
+    info <- retry(rentrez::entrez_fetch(db='pubmed', id=pmid, rettype='xml')) %>%
+        rentrez::parse_pubmed_xml() %>%
+        unclass()
+    attr(info, 'empty') <- NULL
+    info
 })
