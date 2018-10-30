@@ -22,3 +22,13 @@ rule annotation:
 
 rule all:
   input: expand(rules.annotation.output, gse_id=config['geo_datasets'])
+
+rule _report_:
+  input: 'report/{doc}.Rmd'
+  output: 'report/{doc}.ipynb'
+  log: 'log/report.log'
+  message: 'Generating Jupyter notebook: {wildcards.doc}'
+  shell: 'notedown --knit --nomagic {input} > {output}'
+
+rule report:
+  input: expand(rules._report_.output, doc=['datasets'])
