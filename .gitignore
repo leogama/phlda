@@ -4,17 +4,17 @@
 /log/
 /output/
 
+# Local package installation
+/local/lib/
+
 # Snakemake state files
 .snakemake/
 
-# R Notebook html outputs
-#*.nb.html
-
-# Microsoft Azure Notebooks
-.aznbsetup.log
-
 # Jupyter notebook checkpoints
 .ipynb_checkpoints/
+
+
+## R stuff ##
 
 # History files
 .Rhistory
