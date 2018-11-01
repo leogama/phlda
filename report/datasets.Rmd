@@ -6,24 +6,24 @@ output: html_notebook
 #knitr::opts_knit$set(root.dir=dirname(getwd()))
 library(magrittr)
 source('../lib/R/geo.R')
-
 config <- yaml::read_yaml('../config.yaml')
+
 config$geo_datasets %>% paste(seq_along(.), ., sep=': ') %>% cat(sep=', ')
 ```
 ```{r}
-gse_id <- config$geo_datasets[1]
-#info <- dget(sprintf('../output/info/%s.txt', gse_id))
-gse_id
+(gse_id <- config$geo_datasets[2])
 ```
 # Information about dataset
-Information retrieved from GEO and PubMed
+
+Information retrieved from NCBI database and GEO website 
 ```{r}
-info = info_from_eutils(gse_id)
-info[!grepl('samples', names(info))]
-```
-```{r}
-info_from_web(gse_id)
-```
-```{r}
-geo_to_pubmed(gse_id)
+info_e = info_from_eutils(gse_id)
+info_w = info_from_web(gse_id)
+info_p = geo_to_pubmed(gse_id)
+
+info = c(info_e[c('title', 'summary')],
+         info_w[c('Overall design', 'geo_url')],
+         info_p[c('doi_url', 'title', 'abstract')])
+
+info %>% lapply(paste, collapse=' ') %>% paste(names(.), ., sep=': ') %>% cat(sep='\n\n')
 ```

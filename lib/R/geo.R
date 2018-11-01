@@ -17,7 +17,8 @@ retry <- function(expr, times=5L) {
 info_from_eutils <- memoise(function(gse_id) {
     id <- sprintf('%s[ACCN]', gse_id)
     id <- retry(rentrez::entrez_search(db='gds', term=id, retmax=1))
-    retry(rentrez::entrez_summary(db='gds', id=id$ids)) %>% unclass()
+    retry(rentrez::entrez_summary(db='gds', id=id$ids)) %>%
+        unclass()
 })
 
 info_from_metadb <- memoise(function(gse_id) {
@@ -31,8 +32,8 @@ info_from_metadb <- memoise(function(gse_id) {
 })
 
 info_from_web <- memoise(function(gse_id) {
-    doc <- gse_id %>%
-        sprintf(fmt='https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=%s') %>%
+    geo_url <- sprintf('https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=%s', gse_id) 
+    doc <- geo_url %>%
         httr::RETRY(verb='GET', times=5L, quiet=TRUE) %>%
         httr::content(encoding='UTF-8')
     info_table <- doc %>%
@@ -41,12 +42,15 @@ info_from_web <- memoise(function(gse_id) {
     info_table %>%
         xml2::xml_find_all(selectr::css_to_xpath('td table')) %>%
         xml2::xml_remove()
-    info_table %>%
+    info <- info_table %>%
         rvest::html_table() %>%
         getElement(1) %>%
         dplyr::filter(X1 != '') %$%
         setNames(X2, X1) %>%
+        gsub('<!--(.|\n)*?-->', '', .) %>%
         as.list()
+    info$geo_url <- geo_url
+    info
 })
 
 geo_to_pubmed <- memoise(function(gse_id) {
@@ -62,5 +66,7 @@ geo_to_pubmed <- memoise(function(gse_id) {
         rentrez::parse_pubmed_xml() %>%
         unclass()
     attr(info, 'empty') <- NULL
+    info$pubmed_url <- sprintf('https://www.ncbi.nlm.nih.gov/pubmed/%s', pmid)
+    info$doi_url <- sprintf('https://doi.org/%s', info$doi)
     info
 })
