@@ -1,4 +1,5 @@
-#!/bin/bash
-#(cd library; git pull --rebase)
-#pip install --user snakemake
-pwd > ~/teste.log
+#!/bin/sh
+cd library
+git pull
+Rscript setup/install.R
+pip install --user snakemake
