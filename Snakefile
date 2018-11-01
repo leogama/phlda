@@ -2,7 +2,7 @@
 
 from os import path
 
-configfile: 'config.yaml'
+configfile: 'config.yml'
 
 rule processed_data:
   output: 'data/processed/{gse_id}_series_matrix.txt.gz'

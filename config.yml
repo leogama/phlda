@@ -13,3 +13,5 @@ genes:
   - PHLDA1
   - PHLDA2
   - PHLDA3
+packages:
+  - GEOquery

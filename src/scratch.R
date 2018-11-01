@@ -1,5 +1,5 @@
 setwd('~/Projects/phlda')
-config <- yaml::read_yaml('config.yaml')
+config <- yaml::read_yaml('config.yml')
 
 
 gse_id <- config$geo_datasets[1]
