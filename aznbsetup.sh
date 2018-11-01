@@ -1,3 +1,4 @@
 #!/bin/bash
-(cd library; git pull --rebase)
-pip install --user snakemake
+#(cd library; git pull --rebase)
+#pip install --user snakemake
+pwd > ~/teste.log
