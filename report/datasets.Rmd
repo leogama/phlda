@@ -10,7 +10,7 @@ output:
 root_dir <- rprojroot::is_git_root$find_file()
 #knitr::opts_knit$set(root.dir=root_dir)
 setwd(root_dir)
-.libPaths(c(.libPaths(), 'local/lib/R'))
+.libPaths(c(.libPaths(), 'env/lib/R'))
 
 library(magrittr)
 source('lib/R/geo.R')

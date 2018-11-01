@@ -1,5 +1,5 @@
 #!/bin/sh
 cd library
-git pull
-R_LIBS_USER='local/lib/R' Rscript setup/install.R
-pip install --user snakemake
+git fetch && git reset --hard origin/master
+R_LIBS_USER='env/lib/R' Rscript setup/install.R
+PYTHONUSERBASE='env' pip install --user snakemake

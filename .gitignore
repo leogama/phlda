@@ -5,7 +5,7 @@
 /output/
 
 # Local package installation
-/local/lib/
+/env/
 
 # Snakemake state files
 .snakemake/
