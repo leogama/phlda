@@ -8,10 +8,13 @@
 .snakemake/
 
 # R Notebook html outputs
-*.nb.html
+#*.nb.html
 
 # Microsoft Azure Notebooks
 .aznbsetup.log
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
 
 # History files
 .Rhistory
