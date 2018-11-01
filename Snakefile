@@ -28,7 +28,9 @@ rule _report_:
   output: 'report/{doc}.ipynb'
   log: 'log/report.log'
   message: 'Generating Jupyter notebook: {wildcards.doc}'
-  shell: 'notedown --knit --nomagic {input} > {output}'
+  run:
+    shell('notedown --knit --nomagic {input} > {output}')
+    shell('sed -i -f report/kernelspec.sed {output}')
 
 rule report:
   input: expand(rules._report_.output, doc=['datasets'])

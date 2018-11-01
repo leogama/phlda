@@ -1,21 +1,35 @@
 ---
 title: "Datasets description"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
-```{r}
-#knitr::opts_knit$set(root.dir=dirname(getwd()))
-library(magrittr)
-source('../lib/R/geo.R')
-config <- yaml::read_yaml('../config.yaml')
 
+# Setup
+```{r}
+root_dir <- rprojroot::is_git_root$find_file()
+#knitr::opts_knit$set(root.dir=root_dir)
+setwd(root_dir)
+.libPaths(c(.libPaths(), 'local/lib/R'))
+
+library(magrittr)
+source('lib/R/geo.R')
+config <- yaml::read_yaml('config.yml')
+```
+
+## List of datasets
+```{r}
 config$geo_datasets %>% paste(seq_along(.), ., sep=': ') %>% cat(sep=', ')
 ```
-```{r}
-(gse_id <- config$geo_datasets[2])
-```
-# Information about dataset
 
-Information retrieved from NCBI database and GEO website 
+## Select dataset
+```{r}
+(gse_id <- config$geo_datasets[1])
+```
+
+# Information about dataset
+Information retrieved from NCBI database and GEO website
+
 ```{r}
 info_e = info_from_eutils(gse_id)
 info_w = info_from_web(gse_id)
