@@ -38,7 +38,7 @@ gse_id %>%
 ```
 
 ## Article highlights
-Relevant exerpts from associated publication.
+Relevant excerpts from associated publication.
 ```{r}
 gse_id %>%
     sprintf(fmt='annot/article/%s.txt') %>%
