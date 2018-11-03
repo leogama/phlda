@@ -1,0 +1,17 @@
+"CHER-LOB is a phase II randomized multicenter trial in which 121 patients with primary HER2-positive breast cancer were randomized to receive preoperative chemotherapy with weekly paclitaxel for 12 weeks followed by 4 weekly courses over 3 weeks of the FEC regimen (fluorouracil, epirubicin, and cyclophosphamide) plus either trastuzumab (arm A), lapatinib (arm B), or the combination of trastuzumab and lapatinib (arm C)" (Guarneri et al 2015:1002)
+
+"Formalin-fixed paraffin-embedded (FFPE) tumor blocks from diagnostic core biopsies and from surgical specimens after preoperative study therapy were centralized and reviewed for quality and tumor content. Fresh-frozen samples from the diagnostic core biopsy were centralized for genomic studies." (Guarneri et al 2015:1002)
+
+"Hormone receptor (HR) status was locally evaluated by IHC, and the cutoff for positivity was immunostaining in 10% of $ tumor cells. HER2 wascentrally re-evaluatedondiagnostic core biopsies and evaluated on surgical specimen following preoperative therapy by a dedicated breast pathologist." (Guarneri et al 2015:1002)
+
+"HER2 FISH analysis (PathVysion HER-2 DNA Probe Kit; Vysis Inc., Downers Grove, IL, https://www.abbottmolecular.com/) was performed in any case of HER2 IHC 21 and in cases of discordance between the local and central laboratories." (Guarneri et al 2015:1002)
+
+"pCR was defined as the absence of invasive breast cancer in both the breast and the axilla." (Guarneri et al 2015:1003)
+
+"Genomic DNA and total RNA were extracted from pretreatment frozen core biopsies of the primary tumor" (Guarneri et al 2015:1003)
+
+"For gene expression analyses, samples that met the quality requirements were further processed according to the Affymetrix GeneChip 39 IVT Express Kit (Affymetrix, Santa Clara, CA, http://www.affymetrix.com) user's manual, starting from 150 ng of total RNA for each sample.The arrays were hybridized, washed, stained, using the Affymetrix Model 450 Fluidics Station using the manufacturer's recommended protocols. After hybridization, wash, and staining, probe array images were acquired using the laser scanner GCS 3000 7G (Affymetrix).The Affymetrix Gene Chip software Command Console was used to create the raw CEL files." (Guarneri et al 2015:1003)
+
+"Of 113 samples available for centralized HER2 evaluation, 110 were confirmed as HER2 overexpressing (IHC 31, n5 82), or FISH amplified (n5 28), for an overall concordance with local laboratories of 97%. Pretreatment tumor characteristics are summarized in Table 1. The majority of tumors were classified as having ductal histology and grade 3. Sixty percent of the cases had positive expression of hormone receptor (estrogen or progesterone receptor), and 58.7% of the patients were estrogen receptor positive." (Guarneri et al 2015:1004)
+
+"Gene expression profiles were obtained from 88 samples deriving from 88 different patients. Patients randomized to receive chemotherapy plus lapatinib were split randomly into training and test sets, balanced for number of pCRs." (Guarneri et al 2015:1005)

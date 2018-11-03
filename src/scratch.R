@@ -1,14 +1,29 @@
-setwd('~/Projects/phlda')
+setwd(rprojroot::is_git_root$find_file())
 config <- yaml::read_yaml('config.yml')
+
+library(magrittr)
+
+# dataset annotation
+info <- config$geo_datasets %>%
+    lapply(function(gse_id) {
+        gse_id %>%
+            sprintf(fmt='output/info/%s.txt') %>%
+            dget()
+    })
+get_info <- function(name) sapply(info, getElement, name=name)
+data.frame(gse_id=config$geo_datasets,
+           platform=paste0('GPL', get_info('gpl')),
+           suppfile=get_info('suppfile'),
+           n_samples=get_info('n_samples')) %>%
+    write.table('annot/datasets.tsv', row.names=F, sep='\t', quote=F)
 
 
 gse_id <- config$geo_datasets[1]
-gse_file <- file.path('cache', 'processed', sprintf('%s.rda', gse_id))
 
 # get data
+gse_file <- file.path('cache', 'processed', sprintf('%s.rda', gse_id))
 gse <- GEOquery::getGEO(gse_id, destdir='data/processed')[[1]]
 
-# study annotation
 
 # sample annotation
 pData(gse)$her2 <- as_factor(pData(gse))  # HER2+ or HER2-
@@ -17,16 +32,3 @@ pData(gse)$outcome <- as_factor(pData(gse))  # pCR or RD
 
 # cache
 save(gse, file=gse_file)
-
-
-
-#-------------------------------------------------------------
-
-gse_ids <- c(
-    # adjuvant trastuzumab
-    'GSE37946', 'GSE42822', 'GSE50948', 'GSE66305',
-    # neoadjuvant trastuzumab
-    'GSE44272', 'GSE58984', 'GSE70233', 'GSE75678', 'GSE76360'
-    # 'GSE22226' # two platforms...
-    # 'GSE26639' # ???
-)

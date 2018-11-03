@@ -6,7 +6,6 @@ geo_datasets:
   - GSE58984
   - GSE66305
   - GSE70233
-  - GSE75678
   - GSE76360
 genes:
   - ERBB2

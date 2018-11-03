@@ -1,0 +1,13 @@
+"US Oncology 02-103 was a single arm neoadjuvant trial involving women with stage II/III breast cancer." (Shen et al 2012:52)
+
+"HER2 status was assessed by immunohistochemistry (IHC) or fluorescent in situ hybridization (FISH). IHC≥3+ was considered positive and IHC 1+ or 2+ was confirmed by FISH. The primary study endpoint was pathologic complete response (pCR) rate defined as no viable invasive cancer in the breast and lymph nodes after completion of neoadjuvant chemotherapy." (Shen et al 2012:52)
+
+"Pre-treatment fineneedle aspiration (FNA) specimens were obtained and immediately placed in RNAlater (Ambion, Austin, TX), and shipped to the University of Texas MD Anderson Cancer Center (UTMDACC) for RNA extraction and gene expression profiling with Affymetrix HU133A gene chips (Affymetrix, Santa Clara, CA)" (Shen et al 2012:52)
+
+"Full gene expression 132 data is available at Gene Expression Omnibus under accession number GSE42822." (Shen et al 2012:52)
+
+"A total of 184 pre-treatment specimens were obtained during the trial. Sufficient and high-quality RNA were isolated from 111 specimens. Of these, 91 specimens were included in the final analysis." (Shen et al 2012:54)
+
+"The patient demographic characteristics of this study population were similar to those from the trial as a whole with respect age, tumor size, node status and ER status, but not to histologic grade and HER- 2 status (Additional file 2: Table S2). The difference is likely due to a relatively large number of patients with unknown tumor grade and HER-2 information. Of the 91 patients eligible for our study, 66 received treatment with FEC/TX and 25 received treatment with FEC/TX plus H. Table 1 details the demographic characteristics for these patients." (Shen et al 2012:54)
+
+"Additional file 1: Code of developing TFEC-MGP from breast cancer cell lines. Additional file 2: Table S1. AUC values for 42 breast cancer cell lines treated by TFEC. Table S2. Clinical and demographic characteristics of breast cancer patients in this study compared with patients in USO trial. Table S3. Two hundred and ninety one affymetrix probes used in TFECMGP. The gene symbols and descriptions of these probes were obtained by using broad institute's molecular signatures database v3.0 (http:// www.broadinstitute.org/gsea/msigdb/index.jsp). Table S4. Identified enriched pathways." (Shen et al 2012:57)

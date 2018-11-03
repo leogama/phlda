@@ -4,6 +4,13 @@ from os import path
 
 configfile: 'config.yml'
 
+rule metadata:
+  output: 'output/info/{gse_id}.txt'
+  message: 'Getting dataset information from databases'
+  script: 'src/metadata.R'
+
+rule annotation:
+
 rule processed_data:
   output: 'data/processed/{gse_id}_series_matrix.txt.gz'
   log: 'log/{gse_id}.processed_data.log'
@@ -15,13 +22,8 @@ rule processed_data:
         Rscript -e 'GEOquery::getGEO("{wildcards.gse_id}", destdir="{destdir}")' &> {log}
       ''')
 
-rule annotation:
-  output: 'output/info/{gse_id}.txt'
-  message: 'Getting dataset information from databases'
-  script: 'src/annotation.R'
-
 rule all:
-  input: expand(rules.annotation.output, gse_id=config['geo_datasets'])
+  input: expand(rules.metadata.output, gse_id=config['geo_datasets'])
 
 rule _report_:
   input: 'report/{doc}.Rmd'

@@ -1,0 +1,15 @@
+"Patient eligibility. Eligible patients were female or male, with stage z II or III breast cancer (T 2 cm, N0-3, and M0), including patients with clinical T1N1M0 (pathologically confirmed nodal status), T4 lesions, and involved infraclavicular and supraclavicular lymph nodes. Patients with T1N0 tumors were not eligible. Patients were eligible based on HER2 overexpression by immunohistochemistry (immunohistochemistry 3+) and/or HER2 gene amplification by fluorescence in situ hybridization (FISH)" (Harris et al 2007:1199)
+
+"Treatment plan. After enrollment, all patients received preoperative treatment consisting of i.v. trastuzumab (4 mg/kg loading dose and 2 then 2 mg/kg weekly for 11 weeks) and 25 mg/m vinorelbine weekly for 12 weeks." (Harris et al 2007:1199)
+
+"Following surgery, the first eight patients received single-agent 2 doxorubicin in a dose-dense fashion (60 mg/m every 2 weeks for four cycles). To improve accrual, the protocol was amended to doxorubicin 2 2 (60 mg/m ) and cyclophosphamide (600 mg/m ; AC) every 3 weeks After anthracycline-based therapy, patients received 12 doses of weekly 2 paclitaxel (80 mg/m ) with concomitant trastuzumab (2 mg/kg) followed by every 3-week trastuzumab (6 mg/kg) to complete 52 weeks of trastuzumab." (Harris et al 2007:1199)
+
+"Pathologic complete response (pCR) was defined as the absence of invasive breast cancer in the breast and axillary lymph nodes at the time of surgery. Clinical tumor response was evaluated using Response Evaluation Criteria in Solid Tumors (27). Clinical complete response (cCR) was defined as no palpable tumor in the breast or lymph nodes before surgery. Clinical partial response (cPR), clinical stable disease (cSD), and clinical progressive disease (cPD) were defined using Response Evaluation Criteria in Solid Tumors." (Harris et al 2007:1199)
+
+"HER2 status assessments by immunohistochemistry and FISH were done on the core biopsy before preoperative therapy and tissue at the time of surgery. ER, PgR, epidermal growth factor receptor (EGFR), and insulin-like growth factor-I (IGF-I) receptor (IGF-IR) assessments were also carried out at these time points." (Harris et al 2007:1199)
+
+"Preoperative core biopsies were obtained using Biopsys Mammotome (Ethicon-Endosurgery, Johnson & Johnson, Cincinnati, OH), immediately frozen on dry ice, embedded in ornithine carbamyl transferase compound (Tissue- 80jC. Tek, Sakura, Torrance, CA), and stored at" (Harris et al 2007:1200)
+
+"A total of 22 of 27 RNA samples could be successfully amplified using Nanoprep RNA kit (Stratagene, La Jolla, CA) and two rounds of RNA amplification. RNA was hybridized to GeneChip U133 Plus 2.0 Gene Arrays (Affymetrix, Santa Clara, CA)." (Harris et al 2007:1200)
+
+"All 48 eligible patients received preoperative vinorelbine and trastuzumab." (Harris et al 2007:1200)

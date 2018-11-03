@@ -1,0 +1,11 @@
+"In the NOAH study, HER2 positivity was defined as 3þ overexpression in more than 10% of tumor cells by immunohistochemical (IHC) testing (Herceptest, Dako) or HER2 amplification ratio 2.0 or more by FISH (Pathvysion HER2 test, Abbott/Vysis) according to a central laboratory (Klinikum Kassell). HR status was defined by local assessment." (Prat et al 2014:512)
+
+"247 formalin-fixed, paraffin-embedded (FFPE) core biopsies were prospectively collected before treatment, and 195 samples remained for RNA extraction and subsequent gene expression profiling analyses. In addition to tumor cells, information about infiltrating inflammatory cells, stroma cells, and normal epithelial cells from the pretreatment sampleswas recordedbya pathologistatacentral laboratory." (Prat et al 2014:512)
+
+"Hybridization of labeled probes on the Affymetrix GeneChip Human Genome U133 Plus 2.0 Array were conducted" (Prat et al 2014:512)
+
+"After extensive quality control, 156 samples met the quality criteria and were used for further gene expression analysis (Supplementary Fig. S1 and Supplementary Table S1). Similar distribution of the main clinicopathologic variables was observed in the subpopulation evaluated here compared with the entire population included in the NOAH trial (Supplementary Table S2)." (Prat et al 2014:512)
+
+"pCR was defined by the absence of residual invasive tumor in the breast and axillary lymph nodes (the presence of carcinoma in situ was allowed)." (Prat et al 2014:513)
+
+"No statistical significant differences in clinicopathologic features were observed between both HER2þ arm, except for pCR rates, which were 44.44% (28/63) and 23.53% (12/51) with and without trastuzumab (P¼ 0.033), respectively. The observed pCR rates are similar to the pCR rates reported in both arms of the NOAH trial (15)." (Prat et al 2014:513)

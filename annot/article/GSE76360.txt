@@ -1,0 +1,11 @@
+"Tissue samples were collected from patients enrolled on two independent multicenter phase II neoadjuvant trials (03-311, NCT00148668; and BrUOG 211B, NCT00617942) for clinical HER2+ stage II-III breast cancer, with HER2 positivity defined as either overexpression by immunohistochemical (IHC) stain (3+) or a FISH ratio for HER/CEP17 of >2.0." (Varadan et al 2016:3251)
+
+"The 03-311 trial was conducted at the Dana-Farber Cancer Institute and the Yale Comprehensive Cancer Center (YCCC). Once a patient signed informed consent, pretreatment tumor biopsies were obtained, and then she received a loading dose of trastuzumab (8 mg/kg). Repeat tumor biopsies were obtained approximately 14 days later, m2 after which the patient started treatment with either vinorelbine 25 mg/ weekly × 12 m2 weeks (NH) or docetaxel 75 mg/ and carboplatin AUC 6 every 3 weeks (TCH) with trastuzumab 2 mg/kg weekly for 12 weeks (TCH); the choice of chemotherapy regimen and subsequent surgical management of the breast and axilla were at the discretion of the treating physicians." (Varadan et al 2016:3251)
+
+"On both studies clinical response was assessed during and at the completion of preoperative therapy, and pathologic response was scored by institutional pathologists, with pCR defined as the absence of residual invasive disease in both the breast and any sampled axillary nodes; for 03-311, patients who failed to achieve pCR were grouped as objective responders (OBJR) category, which included complete and partial response (CR + PR), and nonresponders (NOR) category including stable and progressive disease." (Varadan et al 2016:3252)
+
+"Fresh core biopsy tissue was placed immediately into optimal cutting temperature (OCT) and frozen at −80°C." (Varadan et al 2016:3252)
+
+"Samples from the 03-311 study were profiled using Illumina HT12v3 Beadchip microarrays." (Varadan et al 2016:3252)
+
+"The microarray data have been deposited in NCBI's Gene Expression Omnibus and are accessible through GEO Series accession number GSE76360" (Varadan et al 2016:3252)
