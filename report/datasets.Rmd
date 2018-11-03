@@ -1,43 +1,48 @@
 ---
-title: "Datasets description"
-output:
-  html_document:
-    df_print: paged
+title: "Datasets information"
+output: html_notebook
 ---
-
-# Setup
 ```{r}
 root_dir <- rprojroot::is_git_root$find_file()
-#knitr::opts_knit$set(root.dir=root_dir)
-setwd(root_dir)
-.libPaths(c(.libPaths(), 'env/lib/R'))
+if (getwd() != root_dir) setwd(root_dir)
+config <- yaml::read_yaml('config.yml')
 
 library(magrittr)
-source('lib/R/geo.R')
-config <- yaml::read_yaml('config.yml')
 ```
 
-## List of datasets
+## Experimental design
+```{r}
+read.delim('annot/datasets.tsv', na.strings='')
+```
+
+## Choose dataset
 ```{r}
 config$geo_datasets %>% paste(seq_along(.), ., sep=': ') %>% cat(sep=', ')
 ```
-
-## Select dataset
 ```{r}
-(gse_id <- config$geo_datasets[1])
+gse_id <- config$geo_datasets[8]
+cat('Selected dataset:', gse_id)
 ```
 
-# Information about dataset
-Information retrieved from NCBI database and GEO website
-
+## Description
+Information retrieved from NCBI database, GEO website and `GEOmetadb`.
 ```{r}
-info_e = info_from_eutils(gse_id)
-info_w = info_from_web(gse_id)
-info_p = geo_to_pubmed(gse_id)
+gse_id %>%
+    sprintf(fmt='annot/info/%s.txt') %>%
+    dget() %>%
+    extract(c('title', 'summary', 'Overall design', 'geo_url', 'article_url', 'article_title', 'article_abstract')) %>%
+    lapply(paste, collapse=' ') %>%
+    paste(toupper(names(.)), ., sep=': ') %>%
+    stringr::str_wrap(width=90) %>%
+    cat(sep='\n\n')
+```
 
-info = c(info_e[c('title', 'summary')],
-         info_w[c('Overall design', 'geo_url')],
-         info_p[c('doi_url', 'title', 'abstract')])
-
-info %>% lapply(paste, collapse=' ') %>% paste(names(.), ., sep=': ') %>% cat(sep='\n\n')
+## Article highlights
+Relevant exerpts from associated publication.
+```{r}
+gse_id %>%
+    sprintf(fmt='annot/article/%s.txt') %>%
+    scan(character(), sep='\n', quote='"', comment.char='(', quiet=T) %>%
+    stringr::str_wrap(width=90) %>%
+    cat(sep='\n\n')
 ```

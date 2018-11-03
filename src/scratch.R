@@ -1,6 +1,8 @@
-setwd(rprojroot::is_git_root$find_file())
+root_dir <- rprojroot::is_git_root$find_file()
+if (getwd() != root_dir) setwd(root_dir)
 config <- yaml::read_yaml('config.yml')
 
+.libPaths(c(.libPaths(), 'env/lib/R'))
 library(magrittr)
 
 # dataset annotation
