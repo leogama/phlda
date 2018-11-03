@@ -5,7 +5,7 @@ from os import path
 configfile: 'config.yml'
 
 rule metadata:
-  output: 'output/info/{gse_id}.txt'
+  output: 'annot/info/{gse_id}.txt'
   message: 'Getting dataset information from databases'
   script: 'src/metadata.R'
 
