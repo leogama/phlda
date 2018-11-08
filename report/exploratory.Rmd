@@ -2,20 +2,35 @@
 title: "Exploratory Analysis"
 output: html_notebook
 ---
-
 ```{r}
+### Execution environment setup ###
+if (!exists('.SETUP', 1)) {
+
+# find library's root directory
 root_dir <- rprojroot::is_git_root$find_file()
 if (getwd() != root_dir) setwd(root_dir)
 
+# wait library setup to finish
+source('lib/R/utils.R')
+finished_setup <- 'tail -1 ~/.nb.setup.log | grep -q "Done initial azure notebooks environment setup"'
+if (file.exists('~/.nb.setup.log')) retry(stopifnot(!system(finished_setup)), times=100, delay=5)
+
+# load packages used here
+.libPaths(c('env/lib/R', .libPaths()))
 suppressPackageStartupMessages({
-    library(Biobase)
     library(magrittr)
     library(simpleCache)
-    source('lib/R/utils.R')
+    setCacheDir('cache')
+    
+    library(GEOquery)
 })
 
-setCacheDir('cache')
+# load global parameters
 config <- yaml::read_yaml('config.yml')
+
+# prevent re-execution
+.SETUP <- TRUE
+}
 ```
 
 ## Choose dataset
