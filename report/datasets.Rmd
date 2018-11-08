@@ -20,7 +20,7 @@ read.delim('annot/datasets.tsv', na.strings='')
 config$geo_datasets %>% paste(seq_along(.), ., sep=': ') %>% cat(sep=', ')
 ```
 ```{r}
-gse_id <- config$geo_datasets[3]
+gse_id <- config$geo_datasets[8]
 cat('Selected dataset:', gse_id)
 ```
 
