@@ -1,36 +1,10 @@
 ---
-title: "Exploratory Analysis"
 output: html_notebook
+title: "Exploratory Analysis"
 ---
 ```{r}
-### Execution environment setup ###
-if (!exists('.SETUP', 1)) {
-
-# find library's root directory
-root_dir <- rprojroot::is_git_root$find_file()
-if (getwd() != root_dir) setwd(root_dir)
-
-# wait library setup to finish
-source('lib/R/utils.R')
-finished_setup <- 'tail -1 ~/.nb.setup.log | grep -q "Done initial azure notebooks environment setup"'
-if (file.exists('~/.nb.setup.log')) retry(stopifnot(!system(finished_setup)), times=100, delay=5)
-
-# load packages used here
-.libPaths(c('env/lib/R', .libPaths()))
-suppressPackageStartupMessages({
-    library(magrittr)
-    library(simpleCache)
-    setCacheDir('cache')
-    
-    library(GEOquery)
-})
-
-# load global parameters
-config <- yaml::read_yaml('config.yml')
-
-# prevent re-execution
-.SETUP <- TRUE
-}
+source(rprojroot::is_git_root$find_file('lib/R/utils.R'))
+config <- notebook_setup(packages=c('dplyr', 'GEOquery'))
 ```
 
 ## Choose dataset
