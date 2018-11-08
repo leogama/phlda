@@ -20,7 +20,7 @@ read.delim('annot/datasets.tsv', na.strings='')
 config$geo_datasets %>% paste(seq_along(.), ., sep=': ') %>% cat(sep=', ')
 ```
 ```{r}
-gse_id <- config$geo_datasets[8]
+gse_id <- config$geo_datasets[3]
 cat('Selected dataset:', gse_id)
 ```
 
@@ -28,7 +28,7 @@ cat('Selected dataset:', gse_id)
 Information retrieved from NCBI database, GEO website and `GEOmetadb`.
 ```{r}
 gse_id %>%
-    sprintf(fmt='annot/info/%s.txt') %>%
+    sprintf(fmt='output/info/%s.txt') %>%
     dget() %>%
     extract(c('title', 'summary', 'Overall design', 'geo_url', 'article_url', 'article_title', 'article_abstract')) %>%
     lapply(paste, collapse=' ') %>%

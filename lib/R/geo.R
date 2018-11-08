@@ -1,27 +1,15 @@
 library(magrittr)
 library(memoise)
+source('lib/R/utils.R')
 
-retry <- function(expr, times=5L) {
-    n <- 0L
-    wrapper <- function(...) {
-        n <<- n + 1L
-        if (n < times)
-            tryCatch(expr, error=wrapper)
-        else 
-            expr
-    }
-    suppressWarnings(wrapper())
-}
-
-
-info_from_eutils <- memoise(function(gse_id) {
+info_from_eutils <- memoise::memoise(function(gse_id) {
     id <- sprintf('%s[ACCN]', gse_id)
     id <- retry(rentrez::entrez_search(db='gds', term=id, retmax=1))
     retry(rentrez::entrez_summary(db='gds', id=id$ids)) %>%
         unclass()
 })
 
-info_from_metadb <- memoise(function(gse_id) {
+info_from_metadb <- memoise::memoise(function(gse_id) {
     stopifnot(!is.na(db_file <- Sys.getenv('R_GEOMETADB', unset=NA)))
     conn <- DBI::dbConnect(RSQLite::SQLite(), db_file)
     on.exit(DBI::dbDisconnect(conn))
@@ -31,7 +19,7 @@ info_from_metadb <- memoise(function(gse_id) {
         as.list()
 })
 
-info_from_web <- memoise(function(gse_id) {
+info_from_web <- memoise::memoise(function(gse_id) {
     geo_url <- sprintf('https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=%s', gse_id) 
     doc <- geo_url %>%
         httr::RETRY(verb='GET', times=5L, quiet=TRUE) %>%
@@ -53,7 +41,7 @@ info_from_web <- memoise(function(gse_id) {
     info
 })
 
-geo_to_pubmed <- memoise(function(gse_id) {
+geo_to_pubmed <- memoise::memoise(function(gse_id) {
     pmid <- tryCatch(info_from_metadb(gse_id)$pubmed_id, error=function(...) NA)
     if (is.na(pmid)) {
         info <- info_from_web(gse_id)

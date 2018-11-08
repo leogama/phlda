@@ -5,25 +5,20 @@ from os import path
 configfile: 'config.yml'
 
 rule metadata:
-  output: 'annot/info/{gse_id}.txt'
-  message: 'Getting dataset information from databases'
+  output: 'output/info/{gse_id}.txt'
+  message: 'Getting information for dataset {wildcards.gse_id}'
   script: 'src/metadata.R'
 
-rule annotation:
-
 rule processed_data:
-  output: 'data/processed/{gse_id}_series_matrix.txt.gz'
-  log: 'log/{gse_id}.processed_data.log'
-  message: 'Get processed data for GEO dataset {wildcards.gse_id}'
-  run:
-    destdir = path.dirname(output[0])
-    if not path.exists(output[0]):
-      shell('''
-        Rscript -e 'GEOquery::getGEO("{wildcards.gse_id}", destdir="{destdir}")' &> {log}
-      ''')
+  output: 'data/processed/{gse_id}_series_matrix.txt.gz', 'data/meta/{gse_id}.tsv'
+  message: 'Getting processed data from GEO for dataset {wildcards.gse_id}'
+  script: 'src/processed_data.R'
+
+rule annotation:
+  output: 'annot/sample/{gse_id}.R'
 
 rule all:
-  input: expand(rules.metadata.output, gse_id=config['geo_datasets'])
+  input: expand(rules.processed_data.output, gse_id=config['geo_datasets'])
 
 rule _report_:
   input: 'report/{doc}.Rmd'

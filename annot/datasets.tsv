@@ -1,9 +1,9 @@
 gse_id	platform	suppfile	n_samples	timepoints	anti_her2	material	note
 GSE37946	GPL96	CEL	50				no description of dataset in publication
 GSE42822	GPL96	CEL	91	pre-treatment	trastuzumab	fresh, fine-needle aspiration	
-GSE44272	GPL13667	CEL	53		trastuzumab	FFPE	
+GSE44272	GPL13667	CEL	53		trastuzumab	FFPE	no pathological outcome, pacients selected by clinical outcome
 GSE50948	GPL570	CEL	156	pre-treatment	trastuzumab	FFPE, core biopsy	
-GSE58984	GPL570	CEL, TXT	94				no publication
+GSE58984	GPL570	CEL, TXT	94				no publication, no pathological outcome, has clinical outcome (time to Distance Disease Free Survival)
 GSE66305	GPL570	CEL	88	pre-treatment	trastuzumab, lapatinib	fresh, core biopsy	
-GSE70233	GPL570	CEL	22	neoadjuvant	trastuzumab	fresh, core biopsy	
-GSE76360	GPL6947	IDAT, TXT	100	pre-treatment, brief-exposure	trastuzumab	fresh, core biopsy	
+GSE70233	GPL570	CEL	22	neoadjuvant	trastuzumab	fresh, core biopsy	has clinical outcome
+GSE76360	GPL6947	IDAT, TXT	100	pre-treatment, brief-exposure	trastuzumab	fresh, core biopsy	has clinical outcome

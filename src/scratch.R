@@ -4,6 +4,9 @@ config <- yaml::read_yaml('config.yml')
 
 .libPaths(c(.libPaths(), 'env/lib/R'))
 library(magrittr)
+library(simpleCache)
+setCacheDir('cache')
+source('lib/R/utils.R')
 
 # dataset annotation
 info <- config$geo_datasets %>%
@@ -20,17 +23,16 @@ data.frame(gse_id=config$geo_datasets,
     write.table('annot/datasets.tsv', row.names=F, sep='\t', quote=F)
 
 
-gse_id <- config$geo_datasets[1]
-
-# get data
-gse_file <- file.path('cache', 'processed', sprintf('%s.rda', gse_id))
-gse <- GEOquery::getGEO(gse_id, destdir='data/processed')[[1]]
-
+(gse_id <- config$geo_datasets[3])
 
 # sample annotation
-pData(gse)$her2 <- as_factor(pData(gse))  # HER2+ or HER2-
-pData(gse)$treatment <- as_factor(pData(gse))  # anti-HER2 treatment (trastuzumab, none...)
-pData(gse)$outcome <- as_factor(pData(gse))  # pCR or RD
+pheno <- read.delim(sprintf('data/meta/%s.tsv', gse_id), check.names=FALSE, colClasses='character')
+table_summary(pheno)
 
-# cache
-save(gse, file=gse_file)
+f <- file(sprintf('annot/sample/%s.R', gse_id), open='a')
+(column <- select_column(pheno))
+dput(file=f, setNames(nm=Filter(Negate(is.na), unique(pheno[[column]]))))
+cat(file=f, ' %>% extract(pheno[["', column, '"]])', sep='')
+close(f)
+
+parse_annotation(gse_id, pheno)

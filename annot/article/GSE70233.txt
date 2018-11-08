@@ -13,3 +13,5 @@
 "A total of 22 of 27 RNA samples could be successfully amplified using Nanoprep RNA kit (Stratagene, La Jolla, CA) and two rounds of RNA amplification. RNA was hybridized to GeneChip U133 Plus 2.0 Gene Arrays (Affymetrix, Santa Clara, CA)." (Harris et al 2007:1200)
 
 "All 48 eligible patients received preoperative vinorelbine and trastuzumab." (Harris et al 2007:1200)
+
+"Clinical variables depicted across the top of the figure include pathologic response phenotype (PathCR, pCR;G, good/complete pCR;B, bad/less than pCR), resistance phenotype (ClinProg, cPD;G, responsive to preoperative therapy; B, no response;R, relapse<6 mon from preoperative therapy),Tstage (2,3, and4 perAmericanJoint Committee on Cancer classification), ER expression (P, positive; N, negative), and PgR (PR) expression (P, positive; N, negative)." (Harris et al 2007:1203)
