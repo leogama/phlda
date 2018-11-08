@@ -16,6 +16,9 @@
 
 ## R stuff ##
 
+# RStudio R Notebooks
+*.nb.html
+
 # History files
 .Rhistory
 .Rapp.history
