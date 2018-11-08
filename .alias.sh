@@ -1,1 +1,1 @@
-alias snakemake='python3 ~/library/env/bin/snakemake'
+alias snakemake="PYTHONUSERBASE=$HOME/library/env python3 $HOME/library/env/bin/snakemake"

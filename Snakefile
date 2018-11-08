@@ -23,7 +23,6 @@ rule all:
 rule _report_:
   input: 'report/{doc}.Rmd'
   output: 'report/{doc}.ipynb'
-  log: 'log/report.log'
   message: 'Generating Jupyter notebook: {wildcards.doc}'
   run:
     shell('notedown --knit --nomagic {input} > {output}')
