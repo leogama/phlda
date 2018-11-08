@@ -1,5 +1,9 @@
-export PYTHONUSERBASE="$PWD/env"
 export R_LIBS_USER="$PWD/env/lib/R"
 Rscript setup/packages.R
-pip install --user snakemake
-python3 env/bin/snakemake all -j
+
+export PYTHONUSERBASE="$PWD/env"
+SNAKEMAKE="$PYTHONUSERBASE/bin/snakemake"
+if [ ! -f "$SNAKEMAKE" ]; then
+    pip install --user snakemake
+fi
+python3 "$SNAKEMAKE" all -j
