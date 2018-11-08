@@ -1,0 +1,47 @@
+---
+title: "Exploratory Analysis"
+output: html_notebook
+---
+
+```{r}
+root_dir <- rprojroot::is_git_root$find_file()
+if (getwd() != root_dir) setwd(root_dir)
+
+suppressPackageStartupMessages({
+    library(Biobase)
+    library(magrittr)
+    library(simpleCache)
+    source('lib/R/utils.R')
+})
+
+setCacheDir('cache')
+config <- yaml::read_yaml('config.yml')
+```
+
+## Choose dataset
+```{r}
+config$geo_datasets %>% paste(seq_along(.), ., sep=': ') %>% cat(sep=', ')
+```
+```{r}
+gse_id <- config$geo_datasets[2]
+cat('Selected dataset:', gse_id)
+```
+
+## Load data
+```{r}
+gse <- suppressMessages(simpleCache(sprintf('processed.%s', gse_id), {
+    gse_id %>%
+    sprintf(fmt='data/processed/%s_series_matrix.txt.gz') %>%
+    GEOquery:::parseGSEMatrix(destdir='data/processed') %$%
+    eset
+}))
+print(gse)
+```
+```{r}
+annot <- as.data.table(parse_annotation(gse_id, pData(gse)))
+annot %>%
+    filter(her2 == 'HER2+') %>%
+    select(treatment, outcome) %>%
+    table()
+```
+

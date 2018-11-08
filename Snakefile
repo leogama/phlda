@@ -31,4 +31,4 @@ rule _report_:
     shell('sed -i -f report/kernelspec.sed {output}')
 
 rule report:
-  input: expand(rules._report_.output, doc=['datasets'])
+  input: expand(rules._report_.output, doc=['datasets', 'exploratory'])

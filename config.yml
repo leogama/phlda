@@ -14,3 +14,4 @@ genes:
   - PHLDA3
 packages:
   - GEOquery
+  - simpleCache
