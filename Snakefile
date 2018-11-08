@@ -18,7 +18,9 @@ rule annotation:
   output: 'annot/sample/{gse_id}.R'
 
 rule all:
-  input: expand(rules.processed_data.output, gse_id=config['geo_datasets'])
+  input:
+    expand(rules.metadata.output, gse_id=config['geo_datasets']),
+    expand(rules.processed_data.output, gse_id=config['geo_datasets'])
 
 rule _report_:
   input: 'report/{doc}.Rmd'
