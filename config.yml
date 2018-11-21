@@ -13,5 +13,14 @@ genes:
   - PHLDA2
   - PHLDA3
 packages:
+  - dplyr
   - GEOquery
+  - ggplot2
+  - jetset
+  - magrittr
+  - memoise
+  - rentrez
+  - rvest
   - simpleCache
+  - yaml
+# vi: set ts=2 sts=2 sw=2 :
