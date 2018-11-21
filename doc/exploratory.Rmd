@@ -1,0 +1,7 @@
+```{r}
+source(rprojroot::is_git_root$find_file('lib/R/utils.R'))
+config <- notebook_setup(c('ggplot2'))
+```
+```{r}
+
+```
