@@ -1,7 +1,11 @@
 ```{r}
 source(rprojroot::is_git_root$find_file('lib/R/utils.R'))
-config <- notebook_setup(c('ggplot2'))
+config <- notebook_setup(c('Biobase', 'ggplot2'))
 ```
 ```{r}
-
+(gse_id <- config$geo_datasets[1])
+```
+```{r}
+gse <- simpleCache(sprintf('processed.%s', gse_id), GEOquery::getGEO(gse_id, destdir='data/processed')[[1]])
+annot <- parse_annotation(gse_id, pData(gse))
 ```
