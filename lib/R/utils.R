@@ -1,4 +1,4 @@
-notebook_setup <- memoise::memoise(function(packages) {
+setup <- memoise::memoise(function(packages) {
     # find library's root directory
     root_dir <- rprojroot::is_git_root$find_file()
     if (getwd() != root_dir) setwd(root_dir)
@@ -24,13 +24,21 @@ notebook_setup <- memoise::memoise(function(packages) {
     })
     
     # load and return global parameters
-    yaml::read_yaml('config.yml')
+    yaml::yaml.load_file('config.yml')
 })
+
+load_data <- function(gse_id) {
+    simpleCache(sprintf('processed.%s', gse_id), {
+        gse_id %>%
+            getGEO(destdir='data/processed') %>%
+            getElement(1)
+    })
+}
 
 parse_annotation <- function(gse_id, pheno) {
     gse_id %>%
         sprintf(fmt='annot/sample/%s.R') %>%
-        yaml::read_yaml() %>%
+        yaml::yaml.load_file() %>%
         lapply(function(x) eval(parse(text=x))) %>%
         lapply(unname)
 }

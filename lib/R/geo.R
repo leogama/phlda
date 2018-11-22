@@ -49,7 +49,7 @@ geo_to_pubmed <- memoise::memoise(function(gse_id) {
             getElement(grep('citation', names(info), ignore.case=TRUE)) %>%
             stringr::str_extract('\\d+$')
     }
-    if (is.na(pmid)) return(NA)
+    if (is.na(pmid)) return()
     info <- retry(rentrez::entrez_fetch(db='pubmed', id=pmid, rettype='xml')) %>%
         rentrez::parse_pubmed_xml() %>%
         unclass()

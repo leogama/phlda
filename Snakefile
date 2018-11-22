@@ -4,10 +4,10 @@ from os import path
 
 configfile: 'config.yml'
 
-rule metadata:
-  output: 'output/info/{gse_id}.txt'
+rule information:
+  output: 'data/info/{gse_id}.txt'
   message: 'Getting information for dataset {wildcards.gse_id}'
-  script: 'src/metadata.R'
+  script: 'src/information.R'
 
 rule processed_data:
   output: 'data/processed/{gse_id}_series_matrix.txt.gz', 'data/meta/{gse_id}.tsv'
@@ -19,16 +19,16 @@ rule annotation:
 
 rule all:
   input:
-    expand(rules.metadata.output, gse_id=config['geo_datasets']),
+    expand(rules.information.output, gse_id=config['geo_datasets']),
     expand(rules.processed_data.output, gse_id=config['geo_datasets'])
 
 rule _report_:
-  input: 'report/{doc}.Rmd'
+  input: 'doc/{doc}.Rmd'
   output: 'report/{doc}.ipynb'
   message: 'Generating Jupyter notebook: {wildcards.doc}'
   run:
     shell('notedown --knit --nomagic {input} > {output}')
-    shell('sed -i -f report/kernelspec.sed {output}')
+    shell('sed -i -f doc/kernelspec.sed {output}')
 
 rule report:
   input: expand(rules._report_.output, doc=['datasets', 'exploratory'])

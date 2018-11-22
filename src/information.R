@@ -10,7 +10,7 @@ info <- c(info_eutils, info_web)
 try(info <- c(info_from_metadb(gse_id), info))
 
 article <- geo_to_pubmed(gse_id)
-if (!is.na(article)) {
+if (!is.null(article)) {
     info$article_url <- article$doi_url
     info$article_title <- article$title
     info$article_abstract <- paste(article$abstract, collapse=' ')

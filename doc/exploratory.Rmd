@@ -1,11 +1,91 @@
+---
+output: html_notebook
+title: "Exploratory Analysis"
+---
 ```{r}
 source(rprojroot::is_git_root$find_file('lib/R/utils.R'))
-config <- notebook_setup(c('Biobase', 'ggplot2'))
+config <- setup(packages=c('dplyr', 'GEOquery', 'ggplot2', 'jetset'))
+```
+
+## Choose dataset
+```{r}
+config$geo_datasets %>% paste(seq_along(.), ., sep=': ') %>% cat(sep=', ')
 ```
 ```{r}
-(gse_id <- config$geo_datasets[1])
+gse_id <- config$geo_datasets[6]
+
+cat('Selected dataset:', gse_id)
+```
+
+# Load data
+```{r}
+eset <- load_data(gse_id)
+
+print(eset)
 ```
 ```{r}
-gse <- simpleCache(sprintf('processed.%s', gse_id), GEOquery::getGEO(gse_id, destdir='data/processed')[[1]])
-annot <- parse_annotation(gse_id, pData(gse))
+pdata <- read.delim(sprintf('data/meta/%s.tsv', gse_id), check.names=FALSE, colClasses='character')
+annot <- gse_id %>%
+    parse_annotation(pdata) %>%
+        as.data.frame() %>%
+        cbind(pdata) %>%
+
+annot %>%
+    filter(her2 == 'HER2+') %>%
+    select(treatment, outcome) %>%
+    table()
+```
+```{r}
+platform <- c(GPL96='hgu133a', GPL570='hgu133plus2')
+probes <- jmap(platform[attr(eset, 'annotation')], symbol=config$genes)
+
+samples <- annot %>%
+    filter(her2 == 'HER2+' & treatment != 'none' & !is.na(outcome)) %>%
+    getElement('geo_accession')
+
+dat <- gse_id %>%
+    load_data() %>%
+    exprs() %>%
+    extract(probes, samples) %>%
+    t() %>%
+    as.data.frame() %>%
+    setNames(config$genes) %>%
+    cbind(select(annot, geo_accession, treatment, outcome))
+
+print(head(dat))
+```
+
+# Expression levels
+```{r}
+plot_expr <- function(gene, dat) {
+    p_value <- with(dat, {
+        x <- dat[outcome == 'pCR', gene]
+        y <- dat[outcome == 'RD', gene]
+        t.test(x, y)$p.value
+    })
+    ggplot(dat) +
+        geom_boxplot() +
+        geom_jitter(position=position_jitter(width=0.1)) +
+        aes_string(x='outcome', y=gene, fill='outcome') +
+        ggtitle(sprintf('P-value for t-test: %.3f', p_value))
+}
+
+for (gene in config$genes) {
+    print(plot_expr(gene, dat))
+}
+```
+
+## Correlation between gene expression levels
+```{r}
+plot_corr <- function(pair, dat) {
+    ggplot(dat) + geom_point() +
+        aes_string(pair[1], pair[2], color='outcome') +
+        ggtitle(sprintf('Correlation: %.2f', cor(dat[[pair[1]]], dat[[pair[2]]])))
+}
+
+gene_pairs <- combn(config$genes, 2, simplify=FALSE)
+
+for (pair in gene_pairs) {
+    print(plot_corr(pair, dat))
+}
 ```

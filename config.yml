@@ -1,12 +1,12 @@
 geo_datasets:
   - GSE37946
-  - GSE42822
-  - GSE44272
+  #- GSE42822
+  #- GSE44272
   - GSE50948
-  - GSE58984
+  #- GSE58984
   - GSE66305
-  - GSE70233
-  - GSE76360
+  #- GSE70233
+  #- GSE76360
 genes:
   - ERBB2
   - PHLDA1
@@ -20,6 +20,7 @@ packages:
   - magrittr
   - memoise
   - rentrez
+  - rprojroot
   - rvest
   - simpleCache
   - yaml

@@ -1,6 +1,6 @@
 root_dir <- rprojroot::is_git_root$find_file()
 if (getwd() != root_dir) setwd(root_dir)
-config <- yaml::read_yaml('config.yml')
+config <- yaml::yaml.load_file('config.yml')
 
 .libPaths(c(.libPaths(), 'env/lib/R'))
 library(magrittr)
@@ -36,3 +36,6 @@ cat(file=f, ' %>% extract(pheno[["', column, '"]])', sep='')
 close(f)
 
 parse_annotation(gse_id, pheno)
+
+# exploratory analysis
+do.call(gridExtra::grid.arrange, c(lapply(config$genes, plot_expr, dat), nrow=1))
