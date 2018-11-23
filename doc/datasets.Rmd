@@ -1,41 +1,37 @@
 ---
-title: "Datasets Information"
 output: html_notebook
+title: "Datasets Information"
 ---
 ```{r}
-### Execution environment setup ###
-if (!exists('.SETUP', 1)) {
-
-# find library's root directory
-root_dir <- rprojroot::is_git_root$find_file()
-if (getwd() != root_dir) setwd(root_dir)
-
-# wait library setup to finish
-source('lib/R/utils.R')
-finished_setup <- 'tail -1 ~/.nb.setup.log | grep -q "Done initial azure notebooks environment setup"'
-if (file.exists('~/.nb.setup.log')) retry(stopifnot(!system(finished_setup)), times=100, delay=5)
-
-# load packages used here
-.libPaths(c('env/lib/R', .libPaths()))
-suppressPackageStartupMessages({
-    library(magrittr)
-    library(simpleCache)
-    setCacheDir('cache')
-})
-
-# load global parameters
-config <- yaml::read_yaml('config.yml')
-
-# prevent re-execution
-.SETUP <- TRUE
-}
+source(rprojroot::is_git_root$find_file('lib/R/utils.R'))
+config <- notebook_setup('dplyr', 'ggplot2')
 ```
 
 ## Experimental design
 ```{r}
 read.delim('annot/datasets.tsv', na.strings='')
 ```
+```{r}
+# exclude "brief exposure" dataset
+geo_datasets <- setdiff(config$geo_datasets, 'GSE76360')
 
+dat <- list()
+for (gse_id in geo_datasets) try(silent=T, {
+    dat[[gse_id]] <- gse_id %>%
+        parse_annotation() %>%
+        select(her2, treatment, outcome) %>%
+        cbind(data.frame(gse_id=gse_id))
+})
+dat <- dat %>%
+    do.call(what=rbind) %>%
+    filter(her2 == 'HER2+' & !is.na(treatment) & !is.na(outcome)) %>%
+    mutate(group=factor(paste(treatment, outcome, sep='/')))
+
+sample_plot <- ggplot(dat, aes(gse_id, fill=group)) +
+    geom_bar(position='dodge') +
+    scale_fill_brewer(palette='Paired', direction=-1)
+print(sample_plot)
+```
 ## Choose dataset
 ```{r}
 config$geo_datasets %>% paste(seq_along(.), ., sep=': ') %>% cat(sep=', ')
