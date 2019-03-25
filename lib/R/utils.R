@@ -1,17 +1,21 @@
+parse_annotation <- function(gse_id, pheno) {
+    pheno <- gse_id %>%
+        sprintf(fmt='data/meta/%s.tsv') %>%
+        read.delim(check.names=FALSE, colClasses='character')
+    annot <- gse_id %>%
+        sprintf(fmt='annot/sample/%s.R') %>%
+        yaml::read_yaml() %>%
+        lapply(function(x) eval(parse(text=x))) %>%
+        lapply(unname)
+    cbind(pheno, annot)
+}
+
 load_data <- function(gse_id) {
     simpleCache(sprintf('processed.%s', gse_id), {
         gse_id %>%
             getGEO(destdir='data/processed') %>%
             getElement(1)
     })
-}
-
-parse_annotation <- function(gse_id, pheno) {
-    gse_id %>%
-        sprintf(fmt='annot/sample/%s.R') %>%
-        yaml::yaml.load_file() %>%
-        lapply(function(x) eval(parse(text=x))) %>%
-        lapply(unname)
 }
 
 retry <- function(expr, times=5L, delay=0L) {

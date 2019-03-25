@@ -4,7 +4,9 @@ title: "Exploratory Analysis"
 ---
 ```{r}
 source(rprojroot::is_git_root$find_file('lib/R/utils.R'))
-config <- setup(packages=c('dplyr', 'GEOquery', 'ggplot2', 'jetset'))
+config <- setup(packages=c('dplyr', 'GEOquery', 'ggplot2', 'jetset', 'tibble'))
+
+platform_map <- c(GPL96='hgu133a', GPL570='hgu133plus2')
 ```
 
 ## Choose dataset
@@ -20,15 +22,12 @@ cat('Selected dataset:', gse_id)
 # Load data
 ```{r}
 eset <- load_data(gse_id)
+platform <- platform_map[attr(eset, 'annotation')]
 
 eset
 ```
 ```{r}
-pdata <- read.delim(sprintf('data/meta/%s.tsv', gse_id), check.names=FALSE, colClasses='character')
-annot <- gse_id %>%
-    parse_annotation(pdata) %>%
-        as.data.frame() %>%
-        cbind(pdata)
+annot <- parse_annotation(gse_id)
 
 annot %>%
     filter(her2 == 'HER2+') %>%
@@ -36,8 +35,7 @@ annot %>%
     table()
 ```
 ```{r}
-platform <- c(GPL96='hgu133a', GPL570='hgu133plus2')
-probes <- jmap(platform[attr(eset, 'annotation')], symbol=config$genes)
+probes <- jmap(platform, symbol=config$genes)
 
 annot <- annot %>%
     filter(her2 == 'HER2+' & treatment != 'none' & !is.na(outcome))
@@ -87,4 +85,15 @@ gene_pairs <- combn(config$genes, 2, simplify=FALSE)
 for (pair in gene_pairs) {
     print(plot_corr(pair, dat))
 }
+```
+
+# Correlation
+```{r}
+probes <- platform %>%
+    sprintf(fmt='scores.%s') %>%
+    get %>%
+    rownames_to_column %>%
+    filter(!duplicated(EntrezID)) %$%
+    rowname
+
 ```

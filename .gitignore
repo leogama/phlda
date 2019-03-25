@@ -2,6 +2,7 @@
 /cache/
 /data/
 /log/
+/misc/
 /output/
 
 # Local package installation
